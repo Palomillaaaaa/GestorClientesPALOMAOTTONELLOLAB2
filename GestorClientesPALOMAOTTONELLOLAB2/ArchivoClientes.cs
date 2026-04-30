@@ -35,6 +35,7 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
            
             string DatosLeidos;
             string[] VecDatos = new string[4];
+            string total;
 
             StreamReader AD = new StreamReader(NombreArchivo);
             DatosLeidos = AD.ReadLine();
@@ -49,11 +50,37 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
             AD.Dispose();
         }
 
+        public Decimal PromedioDeuda() 
+        {
+            string []VecDatos = new string[4];
+            string DatosLeidos;
+            decimal total= 0;
+            int C = 0;
+            
+
+            StreamReader AD = new StreamReader(NombreArchivo);
+            
+            DatosLeidos = AD.ReadLine();
+
+            while (DatosLeidos != null) 
+            {
+                C++;
+                VecDatos = DatosLeidos.Split(';');
+                total = total + Convert.ToDecimal(VecDatos[2]);
+
+                DatosLeidos = AD.ReadLine();
+                
+            }
+            AD.Close();
+            AD.Dispose();
+            return total / C;
+
+        }
         public void GenerarReporte()
         {  
             string DatosLeidos;
             string[] VecDatos = new string[4];
-            StreamWriter Reporte = new StreamWriter("Reporte.csv", false);
+            StreamWriter Reporte = new StreamWriter("Reporte.csv", false,Encoding.UTF8);
 
             Int32 cantidad = 0;
             decimal total = 0;
