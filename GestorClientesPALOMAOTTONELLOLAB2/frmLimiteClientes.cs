@@ -33,5 +33,21 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
 
             x.Listar(dgvClientes);
         }
+
+        private void lblCantidadDeClientes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPromedioDeuda_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReporte_Click(object sender, EventArgs e)
+        {
+            x.GenerarReporte();
+            MessageBox.Show("Reporte Generado Correctamente"); 
+        }
     }
 }

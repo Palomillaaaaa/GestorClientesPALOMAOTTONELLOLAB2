@@ -33,5 +33,12 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
             formulario.MdiParent = this;    
             formulario.Show();    
         }
+
+        private void listadoDeTodosLosClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form formulario = new frmLimiteClientes();
+            formulario.MdiParent = this;
+            formulario.Show();
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
     internal class ArchivoClientes
     {
         public string NombreArchivo = "Clientes.csv";
-        {
+        
 
             public void Grabar(string cod, string nom, string deu, string lim)
         {
@@ -49,7 +49,52 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
             AD.Dispose();
         }
 
+        public void GenerarReporte()
+        {  
+            string DatosLeidos;
+            string[] VecDatos = new string[4];
+            StreamWriter Reporte = new StreamWriter("Reporte.csv", false);
+
+            Int32 cantidad = 0;
+            decimal total = 0;
+            Reporte.WriteLine("Listado de Clientes\n");
+            Reporte.WriteLine(" ");
+            Reporte.WriteLine("Código; Nombre; Límite; Deuda");
+
+            StreamReader AD = new StreamReader(NombreArchivo);
+
+            DatosLeidos = AD.ReadLine();
+           
+            while (DatosLeidos != null)
+            {
+                VecDatos = DatosLeidos.Split(';');
+                Reporte.Write(VecDatos[0]);
+                Reporte.Write(';');
+                Reporte.Write(VecDatos[1]);
+                Reporte.Write(';');
+                Reporte.Write(VecDatos[3]);
+                Reporte.Write(';');
+                Reporte.Write(VecDatos[2]);
+
+                DatosLeidos = AD.ReadLine();
+                cantidad++;
+                total = total + Convert.ToDecimal(VecDatos[2]);
+
+            }
+            Reporte.Write("Total de deudas: ;; ");
+            Reporte.WriteLine(total);
+            Reporte.Write("Cantidad de Clientes: ;; ");
+            Reporte.WriteLine(cantidad);
+            Reporte.Write("Promedio de deudas: ;; ");
+            Reporte.WriteLine(total/cantidad);
+
+            Reporte.Close();
+            Reporte.Dispose();
+            
+        }
+    }
+    }
 
             
-    }
 }
+
