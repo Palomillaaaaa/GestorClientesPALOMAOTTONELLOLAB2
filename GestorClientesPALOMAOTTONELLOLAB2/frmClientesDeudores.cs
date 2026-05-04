@@ -24,10 +24,10 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
         ArchivoClientes x = new ArchivoClientes();  
         private void frmClientesDeudores_Load(object sender, EventArgs e)
         {
-            x.ListarDeudores(dvgDeudores);
-            lblCantidadDeClientes.Text = Convert.ToString(x.CantidadClientesDeudores(dvgDeudores));
-            lblTOTAL.Text = Convert.ToString(x.SumarDeuda(dvgDeudores));
-            lblPromedio = Convert.ToString()
+        //    x.ListarDeudores(dvgDeudores);
+        //    lblCantidadDeClientes.Text = Convert.ToString(x.CantidadClientesDeudores(dvgDeudores));
+        //    lblTOTAL.Text = Convert.ToString(x.SumarDeuda(dvgDeudores));
+        //    lblPromedio = Convert.ToString();
         }
 
         private void lblTOTAL_Click(object sender, EventArgs e)
