@@ -35,13 +35,13 @@
             this.lblPromedioDeuda = new System.Windows.Forms.Label();
             this.lblCantidad = new System.Windows.Forms.Label();
             this.lblTotalDeuda = new System.Windows.Forms.Label();
-            this.dvgDeudores = new System.Windows.Forms.DataGridView();
+            this.dgvDeudores = new System.Windows.Forms.DataGridView();
             this.Código = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Deuda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Limite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbConsultadedatos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgDeudores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDeudores)).BeginInit();
             this.SuspendLayout();
             // 
             // grbConsultadedatos
@@ -52,7 +52,7 @@
             this.grbConsultadedatos.Controls.Add(this.lblPromedioDeuda);
             this.grbConsultadedatos.Controls.Add(this.lblCantidad);
             this.grbConsultadedatos.Controls.Add(this.lblTotalDeuda);
-            this.grbConsultadedatos.Controls.Add(this.dvgDeudores);
+            this.grbConsultadedatos.Controls.Add(this.dgvDeudores);
             this.grbConsultadedatos.Location = new System.Drawing.Point(142, 46);
             this.grbConsultadedatos.Name = "grbConsultadedatos";
             this.grbConsultadedatos.Size = new System.Drawing.Size(516, 533);
@@ -121,19 +121,19 @@
             this.lblTotalDeuda.TabIndex = 8;
             this.lblTotalDeuda.Text = "El total de la deuda es de ";
             // 
-            // dvgDeudores
+            // dgvDeudores
             // 
-            this.dvgDeudores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgDeudores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvDeudores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDeudores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Código,
             this.Nombre,
             this.Deuda,
             this.Limite});
-            this.dvgDeudores.Location = new System.Drawing.Point(17, 20);
-            this.dvgDeudores.Name = "dvgDeudores";
-            this.dvgDeudores.Size = new System.Drawing.Size(446, 349);
-            this.dvgDeudores.TabIndex = 0;
-            this.dvgDeudores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
+            this.dgvDeudores.Location = new System.Drawing.Point(17, 20);
+            this.dgvDeudores.Name = "dgvDeudores";
+            this.dgvDeudores.Size = new System.Drawing.Size(446, 349);
+            this.dgvDeudores.TabIndex = 0;
+            this.dgvDeudores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
             // 
             // Código
             // 
@@ -166,7 +166,7 @@
             this.Load += new System.EventHandler(this.frmClientesDeudores_Load);
             this.grbConsultadedatos.ResumeLayout(false);
             this.grbConsultadedatos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgDeudores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDeudores)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -180,7 +180,7 @@
         private System.Windows.Forms.Label lblPromedioDeuda;
         private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.Label lblTotalDeuda;
-        private System.Windows.Forms.DataGridView dvgDeudores;
+        private System.Windows.Forms.DataGridView dgvDeudores;
         private System.Windows.Forms.DataGridViewTextBoxColumn Código;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Deuda;

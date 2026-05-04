@@ -31,7 +31,7 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
         private void frmLimiteClientes_Load(object sender, EventArgs e)
         {
 
-            x.Listar(dgvClientes);
+            x.Listar(dvgClientes);
         }
 
         private void lblCantidadDeClientes_Click(object sender, EventArgs e)

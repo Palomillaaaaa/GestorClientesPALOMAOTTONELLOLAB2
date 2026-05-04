@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.grbConsultadedatos = new System.Windows.Forms.GroupBox();
+            this.btnReporte = new System.Windows.Forms.Button();
             this.lblPromedio = new System.Windows.Forms.Label();
             this.lblCantidadDeClientes = new System.Windows.Forms.Label();
             this.lblTOTAL = new System.Windows.Forms.Label();
             this.lblPromedioDeuda = new System.Windows.Forms.Label();
             this.lblCantidad = new System.Windows.Forms.Label();
             this.lblTotalDeuda = new System.Windows.Forms.Label();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.dvgClientes = new System.Windows.Forms.DataGridView();
             this.Código = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Deuda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Limite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnReporte = new System.Windows.Forms.Button();
             this.grbConsultadedatos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgClientes)).BeginInit();
             this.SuspendLayout();
             // 
             // grbConsultadedatos
@@ -54,7 +54,7 @@
             this.grbConsultadedatos.Controls.Add(this.lblPromedioDeuda);
             this.grbConsultadedatos.Controls.Add(this.lblCantidad);
             this.grbConsultadedatos.Controls.Add(this.lblTotalDeuda);
-            this.grbConsultadedatos.Controls.Add(this.dgvClientes);
+            this.grbConsultadedatos.Controls.Add(this.dvgClientes);
             this.grbConsultadedatos.Location = new System.Drawing.Point(30, 31);
             this.grbConsultadedatos.Name = "grbConsultadedatos";
             this.grbConsultadedatos.Size = new System.Drawing.Size(516, 359);
@@ -62,6 +62,16 @@
             this.grbConsultadedatos.TabStop = false;
             this.grbConsultadedatos.Text = "Consulta de datos";
             this.grbConsultadedatos.Enter += new System.EventHandler(this.grbConsultadedatos_Enter);
+            // 
+            // btnReporte
+            // 
+            this.btnReporte.Location = new System.Drawing.Point(26, 277);
+            this.btnReporte.Name = "btnReporte";
+            this.btnReporte.Size = new System.Drawing.Size(100, 32);
+            this.btnReporte.TabIndex = 16;
+            this.btnReporte.Text = "Reporte";
+            this.btnReporte.UseVisualStyleBackColor = true;
+            this.btnReporte.Click += new System.EventHandler(this.btnReporte_Click);
             // 
             // lblPromedio
             // 
@@ -126,18 +136,18 @@
             this.lblTotalDeuda.Text = "El total de la deuda es de ";
             this.lblTotalDeuda.Click += new System.EventHandler(this.lblNombre_Click);
             // 
-            // dgvClientes
+            // dvgClientes
             // 
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dvgClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Código,
             this.Nombre,
             this.Deuda,
             this.Limite});
-            this.dgvClientes.Location = new System.Drawing.Point(17, 20);
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.Size = new System.Drawing.Size(446, 190);
-            this.dgvClientes.TabIndex = 0;
+            this.dvgClientes.Location = new System.Drawing.Point(17, 20);
+            this.dvgClientes.Name = "dvgClientes";
+            this.dvgClientes.Size = new System.Drawing.Size(446, 190);
+            this.dvgClientes.TabIndex = 0;
             // 
             // Código
             // 
@@ -159,16 +169,6 @@
             this.Limite.HeaderText = "Limite de Crédito";
             this.Limite.Name = "Limite";
             // 
-            // btnReporte
-            // 
-            this.btnReporte.Location = new System.Drawing.Point(26, 277);
-            this.btnReporte.Name = "btnReporte";
-            this.btnReporte.Size = new System.Drawing.Size(100, 32);
-            this.btnReporte.TabIndex = 16;
-            this.btnReporte.Text = "Reporte";
-            this.btnReporte.UseVisualStyleBackColor = true;
-            this.btnReporte.Click += new System.EventHandler(this.btnReporte_Click);
-            // 
             // frmLimiteClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,7 +180,7 @@
             this.Load += new System.EventHandler(this.frmLimiteClientes_Load);
             this.grbConsultadedatos.ResumeLayout(false);
             this.grbConsultadedatos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgClientes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -188,7 +188,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grbConsultadedatos;
-        private System.Windows.Forms.DataGridView dgvClientes;
+        private System.Windows.Forms.DataGridView dvgClientes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Código;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Deuda;
