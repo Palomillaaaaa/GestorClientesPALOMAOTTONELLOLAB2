@@ -53,6 +53,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBusquedaClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBusquedaClientes.Designer.cs">
+      <DependentUpon>frmBusquedaClientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCargaClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <Compile Include="RegCliente.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBusquedaClientes.resx">
+      <DependentUpon>frmBusquedaClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCargaClientes.resx">
       <DependentUpon>frmCargaClientes.cs</DependentUpon>

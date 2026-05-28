@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,15 +18,42 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
     {
         public string NombreArchivo = "Clientes.csv";
 
+        private OleDbConnection conexion = new OleDbConnection();
+        private OleDbCommand comando = new OleDbCommand();
+        private OleDbDataAdapter adaptador = new OleDbDataAdapter();
+
+        private string cadenaConexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Clientes.mdb";
+        private string tabla = "Cliente";
+
+        private Decimal deuda;
+        private Int32 cantidad; 
+
         public struct RegClientes 
         {
-            public Int32 Codigo;
-            public string Nombre;
-            public Decimal Deuda;
-            public Decimal Limite;
+            private Int32 idCli;
+            private String nom;
+            private Int32 Cod;
+            private Decimal deu;
+            private Decimal Lim;
+            private Decimal IdAud;
+
         }
 
+        public Decimal TotalDeuda
+        {
+            get { return deuda; }
 
+        }
+
+        public Int32 CantidadDeudores 
+        {
+            get { return cantidad; }
+        }
+
+        public Decimal PromedioDeuda 
+        {
+            get { return deuda/cantidad;}
+        }
         public void Grabar(string cod, string nom, string deu, string lim)
         {
             //abrir
@@ -40,7 +70,9 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
             AD.Dispose();
         }
 
-            private RegClientes[] VecClientes = new RegClientes[1500];
+       
+        
+        private RegClientes[] VecClientes = new RegClientes[1500];
             private Int32 IND = 0;
 
 
@@ -84,7 +116,7 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
             {
                 for (Int32 i = 0; i < IND - 1; i++)
                 {
-                    if (VecClientes[i].Codigo > VecClientes[i + 1].Codigo) 
+                    if (VecClientes[i].cod > VecClientes[i + 1].cod) 
                     {
                         aux = VecClientes[i];
                         VecClientes[i] = VecClientes[i + 1];
