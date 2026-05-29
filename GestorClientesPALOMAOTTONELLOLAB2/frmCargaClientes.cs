@@ -25,7 +25,7 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            x.Grabar (txtCodigo.Text,txtNombre.Text, txtDeuda.Text, txtLimite.Text);
+            x.Grabar (txtCodigo.Text,txtNombre.Text, txtAutomovil.Text, txtLimite.Text);
             MessageBox.Show("Felicitaciones ha cargado un cliente!!!");
 
         }

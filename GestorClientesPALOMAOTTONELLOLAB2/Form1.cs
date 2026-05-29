@@ -16,29 +16,49 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
         {
             InitializeComponent();
         }
-
-        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listadoDeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void agregarNuevosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form formulario = new frmCargaClientes();
-            formulario.MdiParent = this;    
-            formulario.Show();    
-        }
-
         private void listadoDeTodosLosClientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form formulario = new frmLimiteClientes();
-            formulario.MdiParent = this;
-            formulario.Show();
+            frmListadoClientes ven = new frmListadoClientes();
+            ven.ShowDialog();
+        }
+
+        private void listadoDeClientesDeudoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmClientesDeudores ven = new frmClientesDeudores();
+            ven.ShowDialog();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buscarClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBusquedaClientes ven = new frmBusquedaClientes();
+            ven.ShowDialog();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmCargaClientes ven = new frmCargaClientes();
+            ven.ShowDialog();
+        }
+
+        private void listadoOrdenadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListadoOrdenado ven = new frmListadoOrdenado();
+            ven.ShowDialog();
+        }
+
+        private void limiteClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLimiteClientes ven = new frmLimiteClientes();
+            ven.ShowDialog();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
         }
     }
 }

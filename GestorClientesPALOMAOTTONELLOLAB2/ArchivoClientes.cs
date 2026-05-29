@@ -17,81 +17,98 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
     internal class ArchivoClientes
     {
         public string NombreArchivo = "Clientes.csv";
-
         private OleDbConnection conexion = new OleDbConnection();
         private OleDbCommand comando = new OleDbCommand();
         private OleDbDataAdapter adaptador = new OleDbDataAdapter();
-
         private string cadenaConexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Clientes.mdb";
         private string tabla = "Cliente";
-
         private Decimal deuda;
-        private Int32 cantidad; 
+        private Int32 cantidad;
 
-        public struct RegClientes 
+        // Campos de la clase
+        private Int32 idCli;
+        private String nom;
+        private Decimal deu;
+        private Decimal lim;
+        private Int32 idAut;
+
+        public struct RegClientes
         {
-            private Int32 idCli;
-            private String nom;
-            private Int32 Cod;
-            private Decimal deu;
-            private Decimal Lim;
-            private Decimal IdAud;
-
+            public Int32 Codigo;
+            public String Nombre;
+            public Decimal Deuda;
+            public Decimal Limite;
+            public Int32 IdAut;
         }
 
-        public Decimal TotalDeuda
-        {
-            get { return deuda; }
+        private RegClientes[] VecClientes = new RegClientes[1500];
+        private Int32 IND = 0;
 
+        // Propiedades
+        public string CadenaConexion { get { return cadenaConexion; } }
+        public string Tabla { get { return tabla; } }
+
+        public Decimal TotalDeuda { get { return deuda; } }
+        public Int32 CantidadDeudores { get { return cantidad; } }
+        public Decimal PromDeuda
+        {
+            get { return cantidad != 0 ? deuda / cantidad : 0; }
         }
 
-        public Int32 CantidadDeudores 
+        public Int32 idCliente
         {
-            get { return cantidad; }
+            get { return idCli; }
+            set { idCli = value; }
+        }
+        public string Nombre
+        {
+            get { return nom; }
+            set { nom = value; }
+        }
+        public Decimal Deuda
+        {
+            get { return deu; }
+            set { deu = value; }
+        }
+        public Decimal Limite
+        {
+            get { return lim; }
+            set { lim = value; }
+        }
+        public Int32 idAutomovil
+        {
+            get { return idAut; }
+            set { idAut = value; }
         }
 
-        public Decimal PromedioDeuda 
-        {
-            get { return deuda/cantidad;}
-        }
+        // ---------- MÉTODOS ----------
+
         public void Grabar(string cod, string nom, string deu, string lim)
         {
-            //abrir
             StreamWriter AD = new StreamWriter(NombreArchivo, true);
-            //LEER
-            AD.Write(cod);
-            AD.Write(";");
-            AD.Write(nom);
-            AD.Write(";");
-            AD.Write(deu);
-            AD.Write(";");
+            AD.Write(cod); AD.Write(";");
+            AD.Write(nom); AD.Write(";");
+            AD.Write(deu); AD.Write(";");
             AD.WriteLine(lim);
             AD.Close();
             AD.Dispose();
         }
 
-       
-        
-        private RegClientes[] VecClientes = new RegClientes[1500];
-            private Int32 IND = 0;
-
-
-            public void OrdenarArchivo()
-            {
-                CargarVector();
-                OrdenarVector();
-                ReescribirArchivo();
-            }
+        public void OrdenarArchivo()
+        {
+            CargarVector();
+            OrdenarVector();
+            ReescribirArchivo();
+        }
 
         private void CargarVector()
         {
             string DatosLeidos;
-            string[] VecDatos = new string[4];
-            
-
+            string[] VecDatos = new string[5];
 
             StreamReader AD = new StreamReader(NombreArchivo);
             DatosLeidos = AD.ReadLine();
+            IND = 0;
 
             while (DatosLeidos != null)
             {
@@ -105,18 +122,17 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
             }
             AD.Close();
             AD.Dispose();
-                
         }
 
         private void OrdenarVector()
         {
-            IND = 0;
+
             RegClientes aux;
-            for (Int32 c = 0; c < IND - 1; c++) //recorre el vector
+            for (Int32 c = 0; c < IND - 1; c++)
             {
                 for (Int32 i = 0; i < IND - 1; i++)
                 {
-                    if (VecClientes[i].cod > VecClientes[i + 1].cod) 
+                    if (VecClientes[i].Codigo > VecClientes[i + 1].Codigo)
                     {
                         aux = VecClientes[i];
                         VecClientes[i] = VecClientes[i + 1];
@@ -126,221 +142,189 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
             }
         }
 
-
-        private void ReescribirArchivo() 
+        private void ReescribirArchivo()
         {
             StreamWriter AD = new StreamWriter(NombreArchivo, false);
-                for (Int32 i = 0; i < IND; i++) 
-                { 
-                //LEER
-               
-                AD.Write(VecClientes[i].Codigo);
-            
-                AD.Write(";");
-                AD.Write(VecClientes[i].Nombre);
-                AD.Write(";");
-                AD.Write(VecClientes[i].Deuda);
-                AD.Write(";");
-                AD.Write(VecClientes[i].Limite);
-                }
-
+            for (Int32 i = 0; i < IND; i++)
+            {
+                AD.Write(VecClientes[i].Codigo); AD.Write(";");
+                AD.Write(VecClientes[i].Nombre); AD.Write(";");
+                AD.Write(VecClientes[i].Deuda); AD.Write(";");
+                AD.WriteLine(VecClientes[i].Limite);
+            }
             AD.Close();
             AD.Dispose();
+        }
 
-        } 
-
-        public Decimal CantidadClientes()
+        public Int32 CantidadClientes()
         {
             string DatosLeidos;
             int C = 0;
-
-
             StreamReader AD = new StreamReader(NombreArchivo);
-
             DatosLeidos = AD.ReadLine();
-
-            while (DatosLeidos != null)
-            {
-                C++;
-                DatosLeidos = AD.ReadLine();
-
-            }
+            while (DatosLeidos != null) { C++; DatosLeidos = AD.ReadLine(); }
             AD.Close();
             AD.Dispose();
             return C;
-
         }
 
-
         public void Listar(DataGridView Grilla)
+        {
+            string DatosLeidos;
+            string[] VecDatos = new string[5];
+
+            StreamReader AD = new StreamReader(NombreArchivo);
+            DatosLeidos = AD.ReadLine();
+            Grilla.Rows.Clear();
+            while (DatosLeidos != null)
             {
-
-                string DatosLeidos;
-                string[] VecDatos = new string[4];
-                //string total;
-
-                StreamReader AD = new StreamReader(NombreArchivo);
+                VecDatos = DatosLeidos.Split(';');
+                Grilla.Rows.Add(VecDatos[0], VecDatos[1], VecDatos[2], VecDatos[3], VecDatos[4]);
                 DatosLeidos = AD.ReadLine();
-                Grilla.Rows.Clear();
-                while (DatosLeidos != null)
-                {
-                    VecDatos = DatosLeidos.Split(';');
-                    Grilla.Rows.Add(VecDatos[0], VecDatos[1], VecDatos[2], VecDatos[3], VecDatos[4]);
-                    DatosLeidos = AD.ReadLine();
-                }
-                AD.Close();
-                AD.Dispose();
             }
+            AD.Close();
+            AD.Dispose();
+        }
 
-            public Decimal PromedioDeuda()
+        public Decimal PromedioDeuda()
+        {
+            string[] VecDatos = new string[5];
+            string DatosLeidos;
+            decimal total = 0;
+            int C = 0;
+            StreamReader AD = new StreamReader(NombreArchivo);
+            DatosLeidos = AD.ReadLine();
+            while (DatosLeidos != null)
             {
-                string[] VecDatos = new string[4];
-                string DatosLeidos;
-                decimal total = 0;
-                int C = 0;
-
-
-                StreamReader AD = new StreamReader(NombreArchivo);
-
+                C++;
+                VecDatos = DatosLeidos.Split(';');
+                total += Convert.ToDecimal(VecDatos[2]);
                 DatosLeidos = AD.ReadLine();
-
-                while (DatosLeidos != null)
-                {
-                    C++;
-                    VecDatos = DatosLeidos.Split(';');
-                    total = total + Convert.ToDecimal(VecDatos[2]);
-
-                    DatosLeidos = AD.ReadLine();
-
-                }
-                AD.Close();
-                AD.Dispose();
-                return total / C;
-
             }
+            AD.Close();
+            AD.Dispose();
+            return C != 0 ? total / C : 0;
+        }
 
         public Decimal SumarDeuda()
         {
-            string[] VecDatos = new string[4];
+            string[] VecDatos = new string[5];
             string DatosLeidos;
             decimal total = 0;
-            
-
-
             StreamReader AD = new StreamReader(NombreArchivo);
-
             DatosLeidos = AD.ReadLine();
-
             while (DatosLeidos != null)
             {
-               
                 VecDatos = DatosLeidos.Split(';');
-                total = total + Convert.ToDecimal(VecDatos[2]);
-
+                total += Convert.ToDecimal(VecDatos[2]);
                 DatosLeidos = AD.ReadLine();
-
             }
             AD.Close();
             AD.Dispose();
             return total;
-
         }
+
         public void GenerarReporte()
-            {
-                string DatosLeidos;
-                string[] VecDatos = new string[4];
-                StreamWriter Reporte = new StreamWriter("Reporte.csv", false, Encoding.UTF8);
-
-                Int32 cantidad = 0;
-                decimal total = 0;
-                Reporte.WriteLine("Listado de Clientes\n");
-                Reporte.WriteLine(" ");
-                Reporte.WriteLine("Código; Nombre; Límite; Deuda");
-
-                StreamReader AD = new StreamReader(NombreArchivo);
-
-                DatosLeidos = AD.ReadLine();
-
-                while (DatosLeidos != null)
-                {
-                    VecDatos = DatosLeidos.Split(';');
-                    Reporte.Write(VecDatos[0]);
-                    Reporte.Write(';');
-                    Reporte.Write(VecDatos[1]);
-                    Reporte.Write(';');
-                    Reporte.Write(VecDatos[3]);
-                    Reporte.Write(';');
-                    Reporte.Write(VecDatos[2]);
-
-                    DatosLeidos = AD.ReadLine();
-                    cantidad++;
-                    total = total + Convert.ToDecimal(VecDatos[2]);
-
-                }
-                Reporte.Write("Total de deudas: ;; ");
-                Reporte.WriteLine(total);
-                Reporte.Write("Cantidad de Clientes: ;; ");
-                Reporte.WriteLine(cantidad);
-                Reporte.Write("Promedio de deudas: ;; ");
-                Reporte.WriteLine(total / cantidad);
-
-                Reporte.Close();
-                Reporte.Dispose();
-
-            }
-        public void ListarDeudores(DataGridView Grilla) 
         {
             string DatosLeidos;
-            string[] VecDatos = new string[4];
-            //string total;
+            string[] VecDatos = new string[5];
+            StreamWriter Reporte = new StreamWriter("Reporte.csv", false, Encoding.UTF8);
+            Int32 cantidad = 0;
+            decimal total = 0;
+            Reporte.WriteLine("Listado de Clientes\n");
+            Reporte.WriteLine("Código; Nombre; Límite; Deuda");
+            StreamReader AD = new StreamReader(NombreArchivo);
+            DatosLeidos = AD.ReadLine();
+            while (DatosLeidos != null)
+            {
+                VecDatos = DatosLeidos.Split(';');
+                Reporte.Write(VecDatos[0]); Reporte.Write(';');
+                Reporte.Write(VecDatos[1]); Reporte.Write(';');
+                Reporte.Write(VecDatos[3]); Reporte.Write(';');
+                Reporte.WriteLine(VecDatos[2]);
+                cantidad++;
+                total += Convert.ToDecimal(VecDatos[2]);
+                DatosLeidos = AD.ReadLine();
+            }
+            AD.Close();
+            AD.Dispose();
+            Reporte.Write("Total de deudas: ;; "); Reporte.WriteLine(total);
+            Reporte.Write("Cantidad de Clientes: ;; "); Reporte.WriteLine(cantidad);
+            Reporte.Write("Promedio de deudas: ;; "); Reporte.WriteLine(cantidad != 0 ? total / cantidad : 0);
+            Reporte.Close();
+            Reporte.Dispose();
+        }
 
+        public void ListarDeudores(DataGridView Grilla)
+        {
+            string DatosLeidos;
+            string[] VecDatos = new string[5];
             StreamReader AD = new StreamReader(NombreArchivo);
             DatosLeidos = AD.ReadLine();
             Grilla.Rows.Clear();
             while (DatosLeidos != null)
             {
                 VecDatos = DatosLeidos.Split(';');
-
-                if (Convert.ToInt32(VecDatos[3]) != 0) 
+                if (Convert.ToDecimal(VecDatos[2]) > 0)
                 {
                     Grilla.Rows.Add(VecDatos[0], VecDatos[1], VecDatos[2], VecDatos[3], VecDatos[4]);
                 }
-            
-                
                 DatosLeidos = AD.ReadLine();
             }
             AD.Close();
             AD.Dispose();
         }
 
-        public int cantidadClientesDeudores(DataGridView Grilla) 
+        public int cantidadClientesDeudores()
         {
             int cont = 0;
             string DatosLeidos;
-            string[] VecDatos = new string[4];
-
+            string[] VecDatos = new string[5];
             StreamReader AD = new StreamReader(NombreArchivo);
-            DatosLeidos=AD.ReadLine();
-            Grilla.Rows.Clear();
-            while (DatosLeidos != null) 
+            DatosLeidos = AD.ReadLine();
+            while (DatosLeidos != null)
             {
                 VecDatos = DatosLeidos.Split(';');
-                if (Convert.ToInt32(VecDatos[3]) != 0) 
-                {
+                if (Convert.ToDecimal(VecDatos[2]) > 0)
                     cont++;
-                }
                 DatosLeidos = AD.ReadLine();
             }
-            
             AD.Close();
             AD.Dispose();
             return cont;
+        }
 
+        public void Buscar(Int32 idCliente)
+        {
+            try
+            {
+                conexion.ConnectionString = cadenaConexion;
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandType = CommandType.TableDirect;
+                comando.CommandText = tabla;
+                OleDbDataReader DR = comando.ExecuteReader();
+                if (DR.HasRows)
+                {
+                    while (DR.Read())
+                    {
+                        if (DR.GetInt32(0) == idCliente)
+                        {
+                            idCli = DR.GetInt32(0);
+                            nom = DR.GetString(1);
+                            deu = DR.GetDecimal(2);
+                            lim = DR.GetDecimal(3);
+                            idAut = DR.GetInt32(4);
+                        }
+                    }
+                }
+                conexion.Close();
+            }
+            catch (Exception e) { MessageBox.Show(e.ToString()); }
         }
     }
 }
 
 
 
-           
 

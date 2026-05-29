@@ -19,20 +19,38 @@ namespace GestorClientesPALOMAOTTONELLOLAB2
 
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
-        ArchivoClientes x = new ArchivoClientes();  
+
+        ArchivoClientes x = new ArchivoClientes();
+
         private void frmClientesDeudores_Load(object sender, EventArgs e)
         {
             x.ListarDeudores(dgvDeudores);
-              lblCantidadDeClientes.Text = Convert.ToString(x.CantidadClientes());
-                lblTOTAL.Text = Convert.ToString(x.SumarDeuda());
-                lblPromedio.Text = Convert.ToString(x.PromedioDeuda());
+            lblCantidadDeClientes.Text = x.CantidadDeudores.ToString();
+            lblTOTAL.Text = "$" + x.TotalDeuda.ToString();
+            lblPromedio.Text = x.PromDeuda.ToString("0.00");
         }
 
         private void lblTOTAL_Click(object sender, EventArgs e)
         {
+        }
 
+        private void btnListar_Click(object sender, EventArgs e)
+        {
+            x.ListarDeudores(dgvDeudores);
+            lblCantidadDeClientes.Text = x.CantidadDeudores.ToString();
+            lblTOTAL.Text = "$" + x.TotalDeuda.ToString();
+            lblPromedio.Text = x.PromDeuda.ToString("0.00");
+        }
+
+        private void lblCantidadDeClientes_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnReporte_Click(object sender, EventArgs e)
+        {
+            ArchivoClientes objClientes = new ArchivoClientes();
+            objClientes.GenerarReporte();
         }
     }
 }
